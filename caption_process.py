@@ -47,7 +47,7 @@ def main():
                     continue
                 if speaker_stephen(text):
                     stephen_speaking = True
-                    text = "".join(x[1] for x in re.findall(r"&gt;&gt; (Stephen:|STEPHEN:|stephen:) (.*)$", text))
+                    text = "".join(x[1] for x in re.findall(r"&gt;&gt; (Stephen:|STEPHEN:|stephen:) (.*)$", text+"<|endoftext|>"))
                     # print(text)
                 if not stephen_speaking:
                     continue
