@@ -87,8 +87,8 @@ We trained the model and saved the model weights after each epoch. Then we gener
 - Rull all cells
 
 ## Contributors
-- @iam-abbas
-- @cshubhamrao
+- [@iam-abbas](https://github.com/iam-abbas)
+- [@cshubhamrao](https://github.com/cshubhamrao)
 
 **Mentions:** 
 - [Martins Frolovs](https://towardsdatascience.com/teaching-gpt-2-a-sense-of-humor-fine-tuning-large-transformer-models-on-a-single-gpu-in-pytorch-59e8cec40912)
