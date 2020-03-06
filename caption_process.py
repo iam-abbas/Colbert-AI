@@ -20,10 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import webvtt
 import glob
 import os.path
 import re
+
+import webvtt
 
 import download
 
@@ -39,22 +40,24 @@ def main():
     txt_file = os.path.join(DATA_DIR, "../", "captions.txt")
     with open(txt_file, "w+") as f:
         for vtt_file in vtt_files:
+            text = []
             stephen_speaking = True
             for caption in vtt.read(vtt_file):
-                text = caption.text
-                if speaker_jon(text):
+                t = caption.text
+                if speaker_jon(t):
                     stephen_speaking = False
                     continue
-                if speaker_stephen(text):
+                if speaker_stephen(t):
                     stephen_speaking = True
-                    text = "".join(x[1] for x in re.findall(r"&gt;&gt; (Stephen:|STEPHEN:|stephen:) (.*)$", text+"<|endoftext|>"))
+                    t = "".join(x[1] for x in re.findall(r"&gt;&gt; (Stephen:|STEPHEN:|stephen:) (.*)$", t))
                     # print(text)
                 if not stephen_speaking:
                     continue
                 # print(text)
-                text = re.sub(speaker, r"\3", text, flags=re.M)
-                print(text.strip("\n "), file=f, end=" ")
+                t = re.sub(speaker, r"\3", t, flags=re.M)
+                text += [t.replace("\n", " ")]
                 # print(text)
+            f.writelines([" ".join(text)] + ["\n", "<|endoftext|>", "\n"])
 
 
 if __name__ == '__main__':
